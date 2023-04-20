@@ -10,36 +10,33 @@ function App() {
   const resultRef = useRef(null); 
   const [result, setResult] = useState(0); 
  
+  //addition function
   function plus(e) { 
     e.preventDefault(); 
     setResult((result) => result + Number(inputRef.current.value)); 
   }; 
- 
+  //substraction function
   function minus(e) { 
-  	// Add the code for the minus function
     e.preventDefault();
     setResult((result) => result - Number(inputRef.current.value));
   };
+  //Multiply Function
   function times(e) { 
-    // Add the code for the multiply function
     e.preventDefault();
     setResult((result) => result * Number(inputRef.current.value));
   }; 
- 
+  //Devide Function 
   function divide(e) { 
-    // Add the code for the divide function
     e.preventDefault();
     setResult((result) => result / Number(inputRef.current.value));
   };
- 
-  function resetInput(e) { 
-    // Add the code for the resetInput function 
+  //Reset Input Function
+  function resetInput(e) {  
     e.preventDefault();
     inputRef.current.value = "";
   }; 
- 
-  function resetResult(e) { 
-  	// Add the code for the resetResult function 
+  //Reset Results Functions
+  function resetResult(e) {  
     e.preventDefault();
     setResult(0);
   }; 
@@ -52,7 +49,7 @@ function App() {
         </p>
         <form> 
         <p ref={resultRef}> 
-          {/* add the value of the current total */}
+          {/* added the value of the current total */}
           {result}
         </p> 
         <input
@@ -61,17 +58,34 @@ function App() {
           type="number" 
           placeholder="Type a number" 
         /> 
-        <button onClick={plus}>add</button>
-        {/* Add the subtract button */}
-        <button onClick={minus}>minus</button>
-        {/* Add the multiply button */}
-        <button onClick={times}>multiply</button>
-        <button onClick={divide}>devide</button>
-        {/* Add the divide button */} 
-        {/* Add the resetInput button */}
-        <button onClick={resetInput}>Reset Input</button>
-        {/* Add the resetResult button */}
-        <button onClick={resetResult}>Reset Result</button>
+        <div>
+          <button onClick={resetInput}>Clear</button>
+          <button onClick={resetResult}>AC</button>
+          <button onClick={plus}>+</button>
+        </div>
+        <div>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button onClick={minus}>−</button>
+        </div>
+        <div>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button onClick={times}>×</button>
+        </div>
+        <div>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button onClick={divide}>÷</button>
+        </div>
+        <div>
+          <button>.</button>
+          <button>0</button>
+          <button>=</button>
+        </div>
       </form>
       </header>
     </div>
