@@ -30,16 +30,15 @@ function App() {
     e.preventDefault();
     setResult((result) => result / Number(inputRef.current.value));
   };
-  //Reset Input Function
   function resetInput(e) {  
     e.preventDefault();
     inputRef.current.value = "";
   }; 
-  //Reset Results Functions
   function resetResult(e) {  
     e.preventDefault();
     setResult(0);
   }; 
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -58,33 +57,35 @@ function App() {
           type="number" 
           placeholder="Type a number" 
         /> 
-        <div>
+        <div className="calculator">
+        <div className="line1">
           <button onClick={resetInput}>Clear</button>
           <button onClick={resetResult}>AC</button>
           <button onClick={plus}>+</button>
         </div>
-        <div>
+        <div className="line234">
           <button>1</button>
           <button>2</button>
           <button>3</button>
           <button onClick={minus}>−</button>
         </div>
-        <div>
+        <div className="line234">
           <button>4</button>
           <button>5</button>
           <button>6</button>
           <button onClick={times}>×</button>
         </div>
-        <div>
+        <div className="line234">
           <button>7</button>
           <button>8</button>
           <button>9</button>
           <button onClick={divide}>÷</button>
         </div>
-        <div>
+        <div className="line5">
           <button>.</button>
           <button>0</button>
           <button>=</button>
+        </div>
         </div>
       </form>
       </header>
