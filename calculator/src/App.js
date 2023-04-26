@@ -1,93 +1,66 @@
 import {
   useState,
-  useRef
 } from "react";
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const inputRef = useRef(null); 
-  const resultRef = useRef(null); 
-  const [result, setResult] = useState(0); 
+  const [calc, setCalc] = useState(""); 
+
+  const op = [ "+", "-", "*", "/"];
+
+  const updateCalc = value => {
+    setCalc(calc + value);
+  }
+  const calculate = () =>{
+    const expression = calc.trim();
+    const res = eval(expression);
+        setCalc(res.toString());
+  }
+  const del = () => {
+    setCalc(calc.slice(0, -1));
+  };
  
-  //addition function
-  function plus(e) { 
-    e.preventDefault(); 
-    setResult((result) => result + Number(inputRef.current.value)); 
-  }; 
-  //substraction function
-  function minus(e) { 
-    e.preventDefault();
-    setResult((result) => result - Number(inputRef.current.value));
-  };
-  //Multiply Function
-  function times(e) { 
-    e.preventDefault();
-    setResult((result) => result * Number(inputRef.current.value));
-  }; 
-  //Devide Function 
-  function divide(e) { 
-    e.preventDefault();
-    setResult((result) => result / Number(inputRef.current.value));
-  };
-  function resetInput(e) {  
-    e.preventDefault();
-    inputRef.current.value = "";
-  }; 
-  function resetResult(e) {  
-    e.preventDefault();
-    setResult(0);
-  }; 
-  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          My Simple Calculator
-        </p>
-        <form> 
-        <p ref={resultRef}> 
-          {/* added the value of the current total */}
-          {result}
-        </p> 
-        <input
-          pattern="[0-9]" 
-          ref={inputRef} 
-          type="number" 
-          placeholder="Type a number" 
-        /> 
+        <h1>My Calculator</h1>
         <div className="calculator">
-        <div className="line1">
-          <button onClick={resetInput}>Clear</button>
-          <button onClick={resetResult}>AC</button>
-          <button onClick={plus}>+</button>
+          <div className="output">
+            <div className="current-value">
+              <p> 
+                {calc || "0"}
+              </p>              
+            </div>
+          </div>
+        <div className="row">
+          <button onClick={() => setCalc("")}>Clear</button>
+          <button onClick={del}>DEL</button>
+          <button onClick={ () => updateCalc('+')}>+</button>
         </div>
-        <div className="line234">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button onClick={minus}>−</button>
+        <div className="row">
+          <button onClick={ () => updateCalc('1')}>1</button>
+          <button onClick={ () => updateCalc('2')}>2</button>
+          <button onClick={ () => updateCalc('3')}>3</button>
+          <button onClick={ () => updateCalc('-')}>-</button>
         </div>
-        <div className="line234">
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button onClick={times}>×</button>
+        <div className="row">
+          <button onClick={ () => updateCalc('4')}>4</button>
+          <button onClick={ () => updateCalc('5')}>5</button>
+          <button onClick={ () => updateCalc('6')}>6</button>
+          <button onClick={ () => updateCalc('*')}>*</button>
         </div>
-        <div className="line234">
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button onClick={divide}>÷</button>
+        <div className="row">
+          <button onClick={ () => updateCalc('7')}>7</button>
+          <button onClick={ () => updateCalc('8')}>8</button>
+          <button onClick={ () => updateCalc('9')}>9</button>
+          <button onClick={ () => updateCalc('/')}>/</button>
         </div>
-        <div className="line5">
-          <button>.</button>
-          <button>0</button>
-          <button>=</button>
+        <div className="row">
+          <button onClick={ () => updateCalc('.')}>.</button>
+          <button onClick={ () => updateCalc('0')}>0</button>
+          <button onClick= {calculate}>=</button>
         </div>
-        </div>
-      </form>
+      </div>
       </header>
     </div>
   );
