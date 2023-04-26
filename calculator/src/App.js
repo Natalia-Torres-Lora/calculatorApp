@@ -4,15 +4,15 @@ import {
 } from "react";
 import './App.css';
 
-function App() {
-  const [calc, setCalc] = useState(""); 
+const op = [ "+", "-", "*", "/"];
 
-  const op = [ "+", "-", "*", "/"];
+function App() {
+  const [calc, setCalc] = useState(0); 
 
   const updateCalc = value => {
     if( 
-      op.includes(value) && calc === '' || op.includes(value) && op.includes(calc.slice(-1))
-    ){
+      op.includes(value) && calc === 0 || (calc === 0 || op.includes(calc.toString().slice(-1))))
+    {
       return;
     }
     setCalc(calc + value);
