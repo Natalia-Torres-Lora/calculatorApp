@@ -1,5 +1,6 @@
 import {
   useState,
+  useEffect
 } from "react";
 import './App.css';
 
@@ -9,6 +10,11 @@ function App() {
   const op = [ "+", "-", "*", "/"];
 
   const updateCalc = value => {
+    if( 
+      op.includes(value) && calc === '' || op.includes(value) && op.includes(calc.slice(-1))
+    ){
+      return;
+    }
     setCalc(calc + value);
   }
   const calculate = () =>{
@@ -19,6 +25,22 @@ function App() {
   const del = () => {
     setCalc(calc.slice(0, -1));
   };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const { key } = event;
+      if (/\d/.test(key)) {
+        updateCalc(key);
+      } else if (op.includes(key)) {
+        updateCalc(key);
+      } else if (key === "Enter") {
+        calculate();
+      } else if (key === "Backspace") {
+        del();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [calc]);
  
   return (
     <div className="App">
