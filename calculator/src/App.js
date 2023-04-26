@@ -3,16 +3,16 @@ import {
   useEffect
 } from "react";
 import './App.css';
-
 const op = [ "+", "-", "*", "/"];
-
 function App() {
-  const [calc, setCalc] = useState(0); 
+  const [calc, setCalc] = useState(""); 
+
+  
 
   const updateCalc = value => {
     if( 
-      op.includes(value) && calc === 0 || (calc === 0 || op.includes(calc.toString().slice(-1))))
-    {
+      op.includes(value) && calc === '' || op.includes(value) && op.includes(calc.slice(-1))
+    ){
       return;
     }
     setCalc(calc + value);
