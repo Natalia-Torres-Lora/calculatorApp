@@ -3,21 +3,32 @@ import {
   useEffect
 } from "react";
 import './App.css';
-const op = [ "+", "-", "*", "/"];
-function App() {
-  const [calc, setCalc] = useState(""); 
 
-  
+const op = [ "+", "-", "*", "/","."];
+
+function App() {
+  const [calc, setCalc] = useState(''); 
 
   const updateCalc = value => {
+    if (value === '0' && calc === ''){
+      return;
+    }
+    if (value === '.' && calc === ''){
+      setCalc('0'+ value);
+    }
     if( 
-      op.includes(value) && calc === '' || op.includes(value) && op.includes(calc.slice(-1))
+      (op.includes(value) && calc === '') || 
+      (op.includes(value) && op.includes(calc.slice(-1)))
+    
     ){
       return;
     }
     setCalc(calc + value);
   }
   const calculate = () =>{
+    if(calc === ''){
+      return;
+    }
     const expression = calc.trim();
     const res = eval(expression);
         setCalc(res.toString());
@@ -50,7 +61,7 @@ function App() {
           <div className="output">
             <div className="current-value">
               <p> 
-                {calc || "0"}
+                {calc || 0}
               </p>              
             </div>
           </div>
