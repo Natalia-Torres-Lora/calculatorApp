@@ -19,7 +19,7 @@
 }
 .calculator{
   width: 250px;
-  height: 335px;
+  height: auto;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
